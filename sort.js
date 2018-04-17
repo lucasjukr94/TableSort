@@ -1,15 +1,13 @@
 $(document).ready(function(e){
 	var TableLength = $("table[data-sortable-table]").length;
 	var ColLength = $("a[data-sortable-col]").length;
-	for(j=0;j<$("table[data-sortable-table]").length;j++){
-		for(p=0;p<$("a[data-sortable-col]").length;p++){
-			$(document).sort(j+p,j);
-		}
+	for(p=0;p<$("a[data-sortable-col]").length;p++){
+		$(document).sort(p);
 	}
 });
 
 (function($){
-	$.fn.sort = function(col,tab){
+	$.fn.sort = function(col){
 		document.getElementById($("a[data-sortable-table]")[col].id).onclick = function(e){
 			var table, rows, switching, i, x, y, shouldSwitch;
 			table = document.getElementById($("a[data-sortable-table]")[col].getAttribute("data-sortable-table"));
