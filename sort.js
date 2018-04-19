@@ -1,24 +1,27 @@
-$(document).ready(function(e){
-	var TableLength = $("table[data-sortable-table]").length;
-	var ColLength = $("a[data-sortable-col]").length;
-	for(p=0;p<$("a[data-sortable-col]").length;p++){
-		$(document).sort(p);
+$(document).ready(function(){
+	var lista = $("a[data-sortable-table]");
+	var listaColId = [];
+	//matriz[n][3], sendo 1 => id da coluna,2 => a[data-sortable-col],3 => a[data-sortable-table]
+	for(i=0;i<lista.length;i++){
+		listaColId.push([lista[i].id,lista[i].getAttribute("data-sortable-col"),lista[i].getAttribute("data-sortable-table")])
 	}
-});
-
-(function($){
-	$.fn.sort = function(col){
-		document.getElementById($("a[data-sortable-table]")[col].id).onclick = function(e){
+	
+	for(i=0;i<listaColId.length;i++){
+		addEventListener("click",sort(listaColId[i][2],listaColId[i][0],listaColId[i][1]));
+	}
+	
+	function sort(tab,col,num){
+		document.getElementById(col).onclick = function(e){
 			var table, rows, switching, i, x, y, shouldSwitch;
-			table = document.getElementById($("a[data-sortable-table]")[col].getAttribute("data-sortable-table"));
+			table = document.getElementById(tab);
 			switching = true;
 			while (switching) {
 				switching = false;
 				rows = table.getElementsByTagName("TR");
 				for (i = 1; i < (rows.length - 1); i++) {
 				  shouldSwitch = false;
-				  x = rows[i].getElementsByTagName("TD")[$("a[data-sortable-col]")[col].getAttribute("data-sortable-col")];
-				  y = rows[i + 1].getElementsByTagName("TD")[$("a[data-sortable-col]")[col].getAttribute("data-sortable-col")];
+				  x = rows[i].getElementsByTagName("TD")[num];
+				  y = rows[i + 1].getElementsByTagName("TD")[num];
 				  if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
 					shouldSwitch= true;
 					break;
@@ -32,4 +35,4 @@ $(document).ready(function(e){
 			return false;
 		};
 	}
-})( jQuery );
+});
