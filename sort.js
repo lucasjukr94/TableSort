@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var listaColId = [];
 	//matriz[n][3], sendo 1 => id da coluna,2 => a[data-sortable-col],3 => a[data-sortable-table]
 	for(i=0;i<lista.length;i++){
-		listaColId.push([lista[i].id,lista[i].getAttribute("data-sortable-col"),lista[i].getAttribute("data-sortable-table"),lista[i].getAttribute("data-sortable-type")]);
+		listaColId.push([lista[i].id,lista[i].parentNode.cellIndex,lista[i].getAttribute("data-sortable-table"),lista[i].getAttribute("data-sortable-type")]);
 	}
 	
 	for(i=0;i<listaColId.length;i++){
